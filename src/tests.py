@@ -61,6 +61,12 @@ class TestVehicle(unittest.TestCase):
     def test_score_of_rider(self):
         self.assertEqual(self.vehicle.score_of_rider(self.rider), 8)
 
+    def test_assign_rider(self):
+        self.vehicle.assign_rider(self.rider)
+
+        self.assertEqual(self.vehicle.current_position, (4, 4))
+        self.assertEqual(self.vehicle.current_time, 8)
+
 
 class TestRider(unittest.TestCase):
 

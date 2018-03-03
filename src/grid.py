@@ -1,3 +1,4 @@
+import statistics
 from vehicle import Vehicle
 from rider import Rider
 
@@ -45,11 +46,14 @@ class Grid:
 
     def solve_greedy(self):
 
+        # Just sort rides by earliest time and assign them to vehicle
+        # with highest score with earliest ending_time
+
         for r in sorted(self.riders, key=lambda x: x.earliest):
 
             v = max(self.vehicles,
                     key=lambda x: (x.score_of_rider(r),
-                                   -x.arriving_time_of_rider(r)))
+                                   -x.ending_time_of_rider(r)))
 
             if v.is_rider_possible(r):
                 v.assign_rider(r)

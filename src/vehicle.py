@@ -44,10 +44,8 @@ class Vehicle:
         self.rides.append(rider)
         self.total_score += self.score_of_rider(rider)
 
-        self.current_position = rider.ending_intersection
         self.current_time = self.ending_time_of_rider(rider)
-
-        print(self.current_time)
+        self.current_position = rider.ending_intersection
 
     def write(self, file):
         file.write('%s' % len(self.rides))

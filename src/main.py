@@ -16,7 +16,7 @@ for i in grids:
         g = Grid()
         g.read(f)
 
-    g.solve_greedy()
+    g.solve_greedy_eliminate_long_riders()
 
     with open('../outputs/%s.txt' % i, 'w') as f:
         g.write(f)
