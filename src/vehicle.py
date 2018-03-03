@@ -3,13 +3,15 @@ from utils import hamming_distance
 
 class Vehicle:
 
-    def __init__(self, index, bonus):
+    def __init__(self, index, bonus, bonus_weigth=1):
         self.index = index
         self.bonus = bonus
-        self.rides = list()
+        self.bonus_weigth = bonus_weigth
+        self.riders = list()
         self.current_time = 0
         self.current_position = (0, 0)
         self.total_score = 0
+        self.weighted_total_score = 0
 
     def distance_to_rider(self, rider):
         return rider.distance_to_vehicle(self)
@@ -29,27 +31,28 @@ class Vehicle:
     def is_rider_possible(self, rider):
         return rider.latest >= self.ending_time_of_rider(rider)
 
-    def score_of_rider(self, rider):
+    def score_of_rider(self, rider, weighted=False):
         s = 0
 
         if self.is_rider_possible(rider):
             s = rider.traveling_distance()
 
         if rider.earliest >= self.arriving_time_of_rider(rider):
-            s += self.bonus
+            s += self.bonus * self.bonus_weigth if weighted else self.bonus
 
         return s
 
     def assign_rider(self, rider):
-        self.rides.append(rider)
+        self.riders.append(rider)
         self.total_score += self.score_of_rider(rider)
+        self.weighted_total_score += self.score_of_rider(rider, weighted=True)
 
         self.current_time = self.ending_time_of_rider(rider)
         self.current_position = rider.ending_intersection
 
     def write(self, file):
-        file.write('%s' % len(self.rides))
+        file.write('%s' % len(self.riders))
 
-        for r in self.rides:
+        for r in self.riders:
             file.write(' %s' % r.index)
         file.write('\n')

@@ -19,8 +19,8 @@ class Rider:
         return hamming_distance(self.start_intersection,
                                 vehicle.current_position)
 
-    # def previous_closed_rides(self, vehicle, all_rides, n=1):
-    #     return list(sorted(
-    #         (r, self.distance_to_next_ride(r, vehicle))
-    #         for r in all_rides if vehicle.is_ride_possible(r)
-    #     ), key=lambda x: x[1])[:n]
+    def __hash__(self):
+        return self.index
+
+    def __eq__(self, other):
+        return self.index == other.index

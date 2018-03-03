@@ -16,9 +16,9 @@ for i in grids:
         g = Grid()
         g.read(f)
 
-    g.solve_greedy_eliminate_long_riders()
+    g.solve()
 
-    with open('../outputs/%s.txt' % i, 'w') as f:
+    with open('../outputs/%s_weight=10#no_approximation.txt' % i, 'w') as f:
         g.write(f)
 
     print('%s done! Score: %d' % (i, g.total_score()))

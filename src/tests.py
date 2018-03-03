@@ -29,7 +29,7 @@ class TestGrid(unittest.TestCase):
 
     def test_write(self):
         with open('../outputs/a_example.testing.txt', 'w') as f:
-            self.g.solve()
+            self.g.solve_greedy()
             self.g.write(f)
 
 
