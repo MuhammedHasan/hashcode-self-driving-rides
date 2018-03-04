@@ -19,6 +19,9 @@ class Rider:
         return hamming_distance(self.start_intersection,
                                 vehicle.current_position)
 
+    def critical_time(self):
+        return self.latest - self.traveling_distance()
+
     def __hash__(self):
         return self.index
 

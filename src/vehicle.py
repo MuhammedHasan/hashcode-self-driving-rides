@@ -1,3 +1,4 @@
+import copy
 from utils import hamming_distance
 
 
@@ -31,13 +32,16 @@ class Vehicle:
     def is_rider_possible(self, rider):
         return rider.latest >= self.ending_time_of_rider(rider)
 
+    def is_bonus_available(self, rider):
+        return rider.earliest >= self.arriving_time_of_rider(rider)
+
     def score_of_rider(self, rider, weighted=False):
         s = 0
 
         if self.is_rider_possible(rider):
             s = rider.traveling_distance()
 
-        if rider.earliest >= self.arriving_time_of_rider(rider):
+        if self.is_bonus_available(rider):
             s += self.bonus * self.bonus_weigth if weighted else self.bonus
 
         return s
@@ -56,3 +60,6 @@ class Vehicle:
         for r in self.riders:
             file.write(' %s' % r.index)
         file.write('\n')
+
+    def clone(self):
+        return copy.deepcopy(self)

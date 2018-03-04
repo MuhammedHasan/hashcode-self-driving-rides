@@ -58,6 +58,9 @@ class TestVehicle(unittest.TestCase):
     def test_is_rider_possible(self):
         self.assertTrue(self.vehicle.is_rider_possible(self.rider))
 
+    def test_is_bonus_avaliable(self):
+        self.assertTrue(self.vehicle.is_rider_possible(self.rider))
+
     def test_score_of_rider(self):
         self.assertEqual(self.vehicle.score_of_rider(self.rider), 8)
 
@@ -77,6 +80,9 @@ class TestRider(unittest.TestCase):
 
     def test_distance_to_vehicle(self):
         self.assertEqual(self.rider.distance_to_vehicle(self.vehicle), 2)
+
+    def test_critical_time(self):
+        self.assertEqual(self.rider.critical_time(), 4)
 
 
 class TestUtils(unittest.TestCase):
