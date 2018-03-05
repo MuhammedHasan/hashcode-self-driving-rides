@@ -1,3 +1,4 @@
+import random
 import copy
 from collections import defaultdict, namedtuple
 
@@ -94,6 +95,17 @@ class Grid:
                 v.assign_rider(r)
                 handled_riders.add(r)
                 continue
+
+    def solve_randomized_greedy(self):
+
+        random.shuffle(self.riders)
+
+        for r in sorted(self.riders):
+
+            v = self.select_best_vehicle(r)
+
+            if v.is_rider_possible(r):
+                v.assign_rider(r)
 
     def solve(self):
 

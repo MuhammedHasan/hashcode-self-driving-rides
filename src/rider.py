@@ -1,3 +1,4 @@
+import random
 from utils import hamming_distance
 
 
@@ -27,3 +28,11 @@ class Rider:
 
     def __eq__(self, other):
         return self.index == other.index
+
+    def __lt__(self, other):
+        if self.critical_time() < other.earliest:
+            return True
+        elif other.critical_time() < self.earliest:
+            return False
+        else:
+            return random.choice([True, False])
