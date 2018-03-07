@@ -107,6 +107,44 @@ class Grid:
             if v.is_rider_possible(r):
                 v.assign_rider(r)
 
+    def solve_lazy_vehicle(self):
+
+        set_riders = set(self.riders)
+
+        while set_riders:
+
+            pair = None
+            min_time = float('inf')
+
+            # for v in self.vehicles:
+
+            v = min(self.vehicles, key=lambda x: x.current_time)
+
+            r = min(set_riders,
+                    key=lambda x: v.starting_time_of_rider(x))
+
+            # if min_time > v.starting_time_of_rider(r):
+            #     min_time = v.starting_time_of_rider(r)
+            pair = (v, r)
+
+            if v.is_rider_possible(r):
+                pair[0].assign_rider(pair[1])
+                set_riders.remove(pair[1])
+            else:
+                set_riders.remove(r)
+
+            remove_riders = []
+
+            # for r in set_riders:
+            #     if not any(v.is_rider_possible(r) for v in self.vehicles):
+            #         remove_riders.append(r)
+
+            # for r in remove_riders:
+            #     set_riders.remove(r)
+
+            print(len(set_riders))
+            print(self.total_score())
+
     def solve(self):
 
         set_riders = set(self.riders)

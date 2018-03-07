@@ -12,7 +12,7 @@ grids = [
 
 best_score = 0
 
-while True:
+if True:
     total_score = 0
 
     for i in grids:
@@ -21,7 +21,7 @@ while True:
             g = Grid()
             g.read(f)
 
-        g.solve_randomized_greedy()
+        g.solve_lazy_vehicle()
 
         if g.total_score() > best_score:
             with open('../outputs/%s#score=%d.txt' % (i, g.total_score()), 'w') as f:
